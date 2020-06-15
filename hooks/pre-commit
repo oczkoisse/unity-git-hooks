@@ -112,31 +112,31 @@ def verify_index_changes(tracked_files: Set[Path], index_changes: Dict[str, Set[
     new_paths = index_changes.setdefault('A', set())
     for pth, in new_paths:
         if pth.suffix == '.meta':
-            asset_file = pth.with_suffix('')
+            asset_file = (pth.with_suffix(''),)
             # .meta file added without adding asset file
             if asset_file not in new_paths and asset_file not in tracked_files:
-                print(f"Added {pth} without adding {asset_file}")
+                print(f"Added {pth} without adding {asset_file[0]}")
                 success = False
         else:
-            meta_file = get_metafile_path(pth)
+            meta_file = (get_metafile_path(pth),)
             # asset added without adding .meta file
             if meta_file not in new_paths and meta_file not in tracked_files:
-                print(f"Added {pth} without adding {meta_file}")
+                print(f"Added {pth} without adding {meta_file[0]}")
                 success = False
 
     deleted_paths = index_changes.setdefault('D', set())
     for pth, in deleted_paths:
         if pth.suffix == '.meta':
-            asset_file = pth.with_suffix('')
+            asset_file = (pth.with_suffix(''),)
             # .meta file deleted without deleting asset
             if asset_file not in deleted_paths or asset_file in tracked_files:
-                print(f"Removed {pth} without removing {asset_file}")
+                print(f"Removed {pth} without removing {asset_file[0]}")
                 success = False
         else:
-            meta_file = get_metafile_path(pth)
+            meta_file = (get_metafile_path(pth),)
             # asset deleted without deleting .meta file
             if meta_file not in deleted_paths or meta_file in tracked_files:
-                print(f"Removed {pth} without removing {meta_file}")
+                print(f"Removed {pth} without removing {meta_file[0]}")
                 success = False
 
     renamed_paths = index_changes.setdefault('R', set())
