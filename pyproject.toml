@@ -1,0 +1,28 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "check_unity_meta_files"
+author = "oczkoisse"
+author-email = "oczkoisse@pm.me"
+home-page = "https://github.com/oczkoisse/unity-git-hooks"
+requires-python = ">=3.6"
+license = "License :: OSI Approved :: MIT License"
+
+[tool.flit.scripts]
+check-unity-meta-files = "check_unity_meta_files.check_unity_meta_files:main"
+
+[tool.flit.sdist]
+exclude = ["tests/", ".vscode/", ".gitignore"]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+isolated_build = True
+envlist = py36,py37,py38,py39
+
+[testenv]
+deps = pytest
+commands = pytest
+"""

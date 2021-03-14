@@ -1,0 +1,7 @@
+-   id: check-unity-meta-files
+    name: Check Unity .meta files
+    description: Check whether every Unity asset has a .meta file in version control.
+    entry: check-unity-meta-files
+    language: python
+    always_run: true
+    pass_filenames: false
